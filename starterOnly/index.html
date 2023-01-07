@@ -63,7 +63,7 @@
               name="reserve"
               action="index.html"
               method="get"
-              onsubmit="return validate();"
+              onsubmit="return validate()"
             >
               <div class="formData">
                 <label for="first">Prénom</label><br />
@@ -72,10 +72,9 @@
                   type="text"
                   id="first"
                   name="first"
-                  minlength="2"
-                  aria-invalid="true"
-                  aria-errormessage="errfirst"
-                />
+                  aria-invalid="false"
+                  aria-errormessage="errlast"
+                /><br />
                 <span id="errfirst" class="error-message">
                   Merci de mettre au moins 2 lettres
                 </span>
@@ -88,10 +87,9 @@
                   type="text"
                   id="last"
                   name="last"
-                  minlength="2"
-                  aria-invalid="true"
+                  aria-invalid="false"
                   aria-errormessage="errlast"
-                />
+                /><br />
                 <span id="errlast" class="error-message">
                   Merci de mettre au moins 2 lettres
                 </span>
@@ -104,7 +102,12 @@
                   type="email"
                   id="email"
                   name="email"
+                  aria-invalid="true"
+                  aria-errormessage="erremail"
                 /><br />
+                <span id="erremail" class="error-message">
+                  Le format de l'adresse mail n'est pas correct
+                </span>
               </div>
 
               <div class="formData">
@@ -114,7 +117,12 @@
                   type="date"
                   id="birthdate"
                   name="birthdate"
+                  aria-invalid="true"
+                  aria-errormessage="errbirthdate"
                 /><br />
+                <span id="errbirthdate" class="error-message">
+                  Le format de l'adresse mail n'est pas correct
+                </span>
               </div>
 
               <div class="formData">
@@ -129,7 +137,12 @@
                   name="quantity"
                   min="0"
                   max="99"
+                  aria-invalid="true"
+                  aria-errormessage="errquantity"
                 />
+                <span id="errquantity" class="error-message">
+                  Merci de mettre un nombre
+                </span>
               </div>
 
               <p class="text-label">
@@ -226,12 +239,7 @@
                 <br />
               </div>
 
-              <input
-                class="btn-submit"
-                type="submit"
-                class="button"
-                value="C'est parti"
-              />
+              <input class="btn-submit" type="submit" value="C'est parti" />
             </form>
           </div>
         </div>

@@ -92,7 +92,8 @@ main {
   cursor: pointer;
 }
 
-.modal-btn:hover {
+.modal-btn:hover,
+.btn-submit:hover {
   background: #3876ac;
 }
 
@@ -103,20 +104,6 @@ main {
 }
 
 /* Modal form */
-
-.button {
-  background: #fe142f;
-  margin-top: 0.5em;
-  padding: 1em;
-  color: #fff;
-  border-radius: 15px;
-  cursor: pointer;
-  font-size: 16px;
-}
-
-.button:hover {
-  background: #3876ac;
-}
 
 .smFont {
   font-size: 16px;
@@ -187,30 +174,35 @@ input {
   font-size: 20px;
   height: 48px;
 }
-.formData[data-error]::after {
+.error-message {
   content: attr(data-error);
-  font-size: 0.4em;
+  font-size: 10px;
+  font-weight: 400;
   color: #e54858;
   display: block;
   margin-top: 7px;
   margin-bottom: 7px;
-  text-align: right;
   line-height: 0.3;
   opacity: 0;
   transition: 0.3s;
 }
-.formData[data-error-visible="true"]::after {
+
+[aria-invalid="true"] {
+  outline: 2px solid red;
+}
+[aria-invalid="true"] ~ .error-message {
   opacity: 1;
+  visibility: visible;
 }
-.formData[data-error-visible="true"] .text-control {
-  border: 2px solid #e54858;
+
+span {
+  margin: 0;
+  padding: 0;
 }
-/* 
-input[data-error]::after {
-    content: attr(data-error);
-    font-size: 0.4em;
-    color: red;
-} */
+
+[aria-invalid="true"] ~ .error-message {
+  visibility: visible;
+}
 .checkbox-label,
 .checkbox2-label {
   position: relative;
@@ -299,21 +291,6 @@ input[data-error]::after {
 }
 .close:after {
   transform: rotate(-45deg);
-}
-
-.error-message {
-  font-size: 10px;
-  font-weight: 400;
-  color: red;
-  visibility: hidden;
-}
-
-[aria-invalid="true"] {
-  outline: 2px solid red;
-}
-
-[aria-invalid="true"] ~ .error-message {
-  visibility: visible;
 }
 
 .btn-submit,
