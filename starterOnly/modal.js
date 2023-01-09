@@ -10,6 +10,11 @@ function editNav() {
 // DOM Elements
 const modalbg = document.querySelector(".bground");
 const content = document.querySelector(".content");
+const modalBody = document.querySelector(".modal-body");
+const modalConfirmation = document.querySelector(".modal-confirmation");
+const modalConfirmationButton = document.querySelector(
+  "#modal-confirmation__button"
+);
 const modalBtn = document.querySelectorAll(".modal-btn");
 const closeModalBtn = document.querySelector(".close");
 const formData = document.querySelectorAll(".formData");
@@ -26,6 +31,7 @@ const spanQuantity = document.querySelector("#errquantity");
 const inputLocation = document.getElementsByName("location");
 const spanLocation = document.querySelector("#errlocation");
 const inputTOU = document.querySelector("#checkbox1");
+const inputEvent = document.querySelector("#checkbox2");
 const spanTOU = document.querySelector("#spanTOU");
 
 // launch modal event
@@ -39,12 +45,32 @@ function launchModal() {
 
 // launch close event
 closeModalBtn.addEventListener("click", closeModal);
+modalConfirmationButton.addEventListener("click", reinitialisation);
 
 // launch close form
 function closeModal() {
   content.classList.remove("show");
   modalbg.classList.remove("show");
+  setTimeout(() => {
+    modalBody.style.visibility = "visible";
+    modalConfirmation.style.visibility = "hidden";
+  }, 500);
 }
+
+//reinitialisation after confirmation
+function reinitialisation() {
+  closeModal();
+  inputFirst.value = "";
+  inputLast.value = "";
+  inputEmail.value = "";
+  inputBirthdate.value = "";
+  inputQuantity.value = "";
+  inputLocation.forEach((location) => {
+    location.checked = false;
+  });
+  inputEvent.checked = false;
+}
+
 function isEmpty(input, span) {
   if (input.value === "") {
     input.setAttribute("aria-invalid", true);
@@ -55,7 +81,7 @@ function isEmpty(input, span) {
 function testFirstOrLastName(input, span) {
   let message = "";
 
-  if (/^([A-ZÀ-Þ][-a-z '-]{1,})+/g.test(input.value)) {
+  if (/(^[A-ZÀ-Þ][A-ZÀ-Þa-z '-]{1,})+/g.test(input.value)) {
     input.setAttribute("aria-invalid", false);
   } else {
     message = "Merci de mettre";
@@ -73,6 +99,8 @@ function testFirstOrLastName(input, span) {
   }
   span.innerHTML = message;
   isEmpty(input, span);
+  if (input.getAttribute("aria-invalid") === "false") return true;
+  else return false;
 }
 
 function testEmail(input, span) {
@@ -85,6 +113,8 @@ function testEmail(input, span) {
   }
   span.innerHTML = message;
   isEmpty(input, span);
+  if (input.getAttribute("aria-invalid") === "false") return true;
+  else return false;
 }
 
 function testDate(input, span) {
@@ -105,6 +135,8 @@ function testDate(input, span) {
     message = "Le format de date n'est pas correct.";
   }
   span.innerHTML = message;
+  if (input.getAttribute("aria-invalid") === "false") return true;
+  else return false;
 }
 
 function dayDiff(d1, d2) {
@@ -127,6 +159,8 @@ function testNumberBetweenZeroAndHundred(input, span) {
   }
   span.innerHTML = message;
   isEmpty(input, span);
+  if (input.getAttribute("aria-invalid") === "false") return true;
+  else return false;
 }
 
 function testLocation(input, span) {
@@ -139,24 +173,42 @@ function testLocation(input, span) {
   if (locationValid) {
     span.style.opacity = 0;
     span.innerHTML = "";
+    return true;
   } else {
-    span.innerHTML = "Le champs est obligatoire.";
+    span.innerHTML = "Vous devez choisir une option.";
     span.style.opacity = 1;
   }
 }
 
 function testTOU(input, span) {
-  if (!input.checked) span.style.color = "#e54858";
-  else span.style.color = "white";
+  if (input.checked) {
+    span.style.color = "white";
+    return true;
+  } else span.style.color = "#e54858";
 }
 
 function validate() {
   event.preventDefault();
-  testFirstOrLastName(inputFirst, spanFirst);
-  testFirstOrLastName(inputLast, spanLast);
-  testEmail(inputEmail, spanEmail);
-  testDate(inputBirthdate, spanBirthdate);
-  testNumberBetweenZeroAndHundred(inputQuantity, spanQuantity);
-  testLocation(inputLocation, spanLocation);
-  testTOU(inputTOU, spanTOU);
+  const firstIsGood = testFirstOrLastName(inputFirst, spanFirst);
+  const lastIsGood = testFirstOrLastName(inputLast, spanLast);
+  const emailIsGood = testEmail(inputEmail, spanEmail);
+  const birtdateIsGood = testDate(inputBirthdate, spanBirthdate);
+  const numberIsGood = testNumberBetweenZeroAndHundred(
+    inputQuantity,
+    spanQuantity
+  );
+  const locationIsGood = testLocation(inputLocation, spanLocation);
+  const touIsGood = testTOU(inputTOU, spanTOU);
+  if (
+    firstIsGood &&
+    lastIsGood &&
+    emailIsGood &&
+    birtdateIsGood &&
+    numberIsGood &&
+    locationIsGood &&
+    touIsGood
+  ) {
+    modalBody.style.visibility = "hidden";
+    modalConfirmation.style.visibility = "visible";
+  }
 }
