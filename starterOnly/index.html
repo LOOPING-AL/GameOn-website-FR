@@ -75,9 +75,7 @@
                   aria-invalid="false"
                   aria-errormessage="errlast"
                 /><br />
-                <span id="errfirst" class="error-message">
-                  Merci de mettre au moins 2 lettres
-                </span>
+                <span id="errfirst" class="error-message"></span>
               </div>
 
               <div class="formData">
@@ -90,24 +88,19 @@
                   aria-invalid="false"
                   aria-errormessage="errlast"
                 /><br />
-                <span id="errlast" class="error-message">
-                  Merci de mettre au moins 2 lettres
-                </span>
+                <span id="errlast" class="error-message"></span>
               </div>
 
               <div class="formData">
                 <label for="email">E-mail</label><br />
                 <input
                   class="text-control"
-                  type="email"
                   id="email"
                   name="email"
-                  aria-invalid="true"
+                  aria-invalid="false"
                   aria-errormessage="erremail"
                 /><br />
-                <span id="erremail" class="error-message">
-                  Le format de l'adresse mail n'est pas correct
-                </span>
+                <span id="erremail" class="error-message"></span>
               </div>
 
               <div class="formData">
@@ -117,12 +110,10 @@
                   type="date"
                   id="birthdate"
                   name="birthdate"
-                  aria-invalid="true"
+                  aria-invalid="false"
                   aria-errormessage="errbirthdate"
                 /><br />
-                <span id="errbirthdate" class="error-message">
-                  Le format de l'adresse mail n'est pas correct
-                </span>
+                <span id="errbirthdate" class="error-message"></span>
               </div>
 
               <div class="formData">
@@ -131,25 +122,20 @@
                   ?</label
                 ><br />
                 <input
-                  type="number"
                   class="text-control"
                   id="quantity"
                   name="quantity"
-                  min="0"
-                  max="99"
-                  aria-invalid="true"
+                  aria-invalid="false"
                   aria-errormessage="errquantity"
                 />
-                <span id="errquantity" class="error-message">
-                  Merci de mettre un nombre
-                </span>
+                <span id="errquantity" class="error-message"></span>
               </div>
 
               <p class="text-label">
                 A quel tournoi souhaitez-vous participer cette année ?
               </p>
 
-              <div class="formData">
+              <div class="formDataLocation">
                 <input
                   class="checkbox-input"
                   type="radio"
@@ -216,6 +202,7 @@
                   <span class="checkbox-icon"></span>
                   Portland</label
                 >
+                <span id="errlocation" class="error-message"></span>
               </div>
 
               <div class="formData">
@@ -225,7 +212,12 @@
                   id="checkbox1"
                   checked
                 />
-                <label class="checkbox2-label" for="checkbox1" required>
+                <label
+                  id="spanTOU"
+                  class="checkbox2-label"
+                  for="checkbox1"
+                  required
+                >
                   <span class="checkbox-icon"></span>
                   J'ai lu et accepté les conditions d'utilisation.
                 </label>

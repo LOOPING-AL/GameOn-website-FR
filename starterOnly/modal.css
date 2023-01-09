@@ -182,7 +182,6 @@ input {
   display: block;
   margin-top: 7px;
   margin-bottom: 7px;
-  line-height: 0.3;
   opacity: 0;
   transition: 0.3s;
 }
@@ -200,9 +199,6 @@ span {
   padding: 0;
 }
 
-[aria-invalid="true"] ~ .error-message {
-  visibility: visible;
-}
 .checkbox-label,
 .checkbox2-label {
   position: relative;
