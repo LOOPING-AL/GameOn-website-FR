@@ -43,6 +43,17 @@ function launchModal() {
   modalbg.classList.add("show");
 }
 
+// document.addEventListener(
+//   "click",
+//   function (event) {
+//     // If user either clicks X button OR clicks outside the modal window, then close modal by calling closeModal()
+//     if (!event.target.closest(".content")) {
+//       closeModal();
+//     }
+//   },
+//   false
+// );
+
 // launch close event
 closeModalBtn.addEventListener("click", closeModal);
 modalConfirmationButton.addEventListener("click", reinitialisation);
@@ -99,22 +110,26 @@ function testFirstOrLastName(input, span) {
   }
   span.innerHTML = message;
   isEmpty(input, span);
-  if (input.getAttribute("aria-invalid") === "false") return true;
-  else return false;
+  if (input.getAttribute("aria-invalid") === "false") {
+    return true;
+  }
+  return false;
 }
 
 function testEmail(input, span) {
   let message = "";
   input.setAttribute("aria-invalid", true);
-  if (!/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g.test(input.value)) {
+  if (!/^[\w-\.]+@([\w-+]+\.)+[\w-]{2,4}$/g.test(input.value)) {
     message = "L'adresse mail n'est pas correct elle doit suivre `abc@abc.abc`";
   } else {
     input.setAttribute("aria-invalid", false);
   }
   span.innerHTML = message;
   isEmpty(input, span);
-  if (input.getAttribute("aria-invalid") === "false") return true;
-  else return false;
+  if (input.getAttribute("aria-invalid") === "false") {
+    return true;
+  }
+  return false;
 }
 
 function testDate(input, span) {
@@ -159,8 +174,10 @@ function testNumberBetweenZeroAndHundred(input, span) {
   }
   span.innerHTML = message;
   isEmpty(input, span);
-  if (input.getAttribute("aria-invalid") === "false") return true;
-  else return false;
+  if (input.getAttribute("aria-invalid") === "false") {
+    return true;
+  }
+  return false;
 }
 
 function testLocation(input, span) {
@@ -174,17 +191,17 @@ function testLocation(input, span) {
     span.style.opacity = 0;
     span.innerHTML = "";
     return true;
-  } else {
-    span.innerHTML = "Vous devez choisir une option.";
-    span.style.opacity = 1;
   }
+  span.innerHTML = "Vous devez choisir une option.";
+  span.style.opacity = 1;
 }
 
 function testTOU(input, span) {
   if (input.checked) {
     span.style.color = "white";
     return true;
-  } else span.style.color = "#e54858";
+  }
+  span.style.color = "#e54858";
 }
 
 function validate() {
