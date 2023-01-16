@@ -7,10 +7,8 @@ function editNav() {
   x.className = "topnav";
 }
 
-// launch modal event
 modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
 
-// launch modal form
 function launchModal() {
   content.classList.add("show");
   modalbg.classList.add("show");
@@ -29,11 +27,9 @@ modalbg.addEventListener(
   false
 );
 
-// launch close event
 closeModalBtn.addEventListener("click", closeModal);
 modalConfirmationButton.addEventListener("click", reinitialisation);
 
-// launch close form
 function closeModal() {
   content.classList.remove("show");
   modalbg.classList.remove("show");
@@ -43,7 +39,6 @@ function closeModal() {
   }, 500);
 }
 
-//reinitialisation after confirmation
 function reinitialisation() {
   closeModal();
   formInputFirst.value = "";
@@ -59,36 +54,76 @@ function reinitialisation() {
 
 function validate() {
   event.preventDefault();
-  const firstIsGood = testName(formInputFirst, formErrorMessageFirst);
-  const lastIsGood = testName(formInputLast, formErrorMessageLast);
-  const emailIsGood = testEmail(formInputEmail, formErrorMessageEmail);
-  const birtdateIsGood = testDate(
-    formInputBirthdate,
-    formErrorMessageBirthdate
-  );
-  const numberIsGood = testNumberBetweenZeroAndHundred(
-    formInputQuantity,
-    formErrorMessageQuantity
-  );
-  const locationRadioButtonIsGood = testLocationRadioButton(
-    formInputLocationRadioButton,
-    formErrorMessageLocationRadioButton
-  );
-  const touIsGood = testCGU(formInputCGU, formErrorTextCGU);
-  if (
-    firstIsGood &&
-    lastIsGood &&
-    emailIsGood &&
-    birtdateIsGood &&
-    numberIsGood &&
-    locationRadioButtonIsGood &&
-    touIsGood
-  ) {
+
+  if (testAllInput()) {
     passModalToComfirmation();
   }
+}
+
+function testAllInput() {
+  let allTestIsGood = true;
+  if (!testName(formInputFirst, formErrorMessageFirst)) {
+    allTestIsGood = false;
+  }
+  if (!testName(formInputLast, formErrorMessageLast)) {
+    allTestIsGood = false;
+  }
+  if (!testEmail(formInputEmail, formErrorMessageEmail)) {
+    allTestIsGood = false;
+  }
+  if (!testDate(formInputBirthdate, formErrorMessageBirthdate)) {
+    allTestIsGood = false;
+  }
+  if (
+    !testNumberBetweenZeroAndHundred(
+      formInputQuantity,
+      formErrorMessageQuantity
+    )
+  ) {
+    allTestIsGood = false;
+  }
+  if (
+    !testLocationRadioButton(
+      formInputLocationRadioButton,
+      formErrorMessageLocationRadioButton
+    )
+  ) {
+    allTestIsGood = false;
+  }
+  if (!testCGU(formInputCGU, formErrorTextCGU, formErrorMessageCGU)) {
+    allTestIsGood = false;
+  }
+  return allTestIsGood;
 }
 
 function passModalToComfirmation() {
   modalBody.style.visibility = "hidden";
   modalConfirmation.style.visibility = "visible";
 }
+
+formInputFirst?.addEventListener("focusout", () =>
+  testName(formInputFirst, formErrorMessageFirst)
+);
+formInputLast.addEventListener("focusout", () =>
+  testName(formInputLast, formErrorMessageLast)
+);
+formInputEmail.addEventListener("focusout", () =>
+  testEmail(formInputEmail, formErrorMessageEmail)
+);
+formInputBirthdate.addEventListener("focusout", () =>
+  testDate(formInputBirthdate, formErrorMessageBirthdate)
+);
+formInputQuantity.addEventListener("focusout", () =>
+  testNumberBetweenZeroAndHundred(formInputQuantity, formErrorMessageQuantity)
+);
+formInputLocationRadioButton.forEach((radio) =>
+  radio.addEventListener("change", () =>
+    testLocationRadioButton(
+      formInputLocationRadioButton,
+      formErrorMessageLocationRadioButton
+    )
+  )
+);
+formInputCGU.addEventListener("change", () =>
+  testCGU(formInputCGU, formErrorTextCGU, formErrorMessageCGU)
+);

@@ -449,6 +449,7 @@ span {
   height: 100%;
   display: block;
   padding: 0;
+  object-fit: cover;
 }
 .copyrights {
   color: #fe142f;
@@ -464,6 +465,11 @@ footer {
   padding-left: 2vw;
   padding-right: 2vw;
   margin: 0 20px;
+}
+@media screen and (max-width: 1000px) {
+  .hero-headline {
+    font-size: 3em;
+  }
 }
 @media screen and (max-width: 800px) {
   .hero-section {
@@ -504,7 +510,7 @@ footer {
   }
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 800px) {
   .topnav a {
     display: none;
   }
@@ -536,5 +542,50 @@ footer {
     float: right;
     display: block;
     margin-top: -15px;
+  }
+  .header-logo > img {
+    height: 25px;
+  }
+  .hero-headline {
+    font-weight: 900;
+    font-size: 32px;
+  }
+  main {
+    margin-bottom: 0;
+  }
+  .content {
+    margin-bottom: 0;
+    border-radius: 10px 10px 0 0;
+    margin-top: 79px;
+  }
+  .hero-content {
+    min-width: 0;
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+  .hero-section {
+    min-height: 80px;
+    margin-bottom: 0;
+  }
+  .hero-text {
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 17px;
+    margin-top: 17px;
+  }
+  .hero-img img {
+    margin-top: 30px;
+  }
+  .hero-section > .btn-signup {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 18px;
+  }
+  .copyrights {
+    font-weight: 500;
+    font-size: 10px;
+    line-height: 12px;
+    margin-top: 20px;
+    margin-bottom: 26px;
   }
 }
