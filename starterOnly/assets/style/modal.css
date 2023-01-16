@@ -169,7 +169,7 @@ main {
   position: absolute;
 }
 .madal-confirmation__text {
-  font-weight: 400px;
+  font-weight: 400;
   font-size: 36px;
 }
 label {
