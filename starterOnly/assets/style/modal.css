@@ -110,7 +110,7 @@ main {
 }
 
 .bground {
-  /* display: none; */
+  display: none;
   visibility: hidden;
   opacity: 0;
   position: fixed;
@@ -129,7 +129,7 @@ main {
   opacity: 1;
 }
 .bground.display {
-  /* display: initial; */
+  display: initial;
 }
 .content {
   margin: 5% auto;

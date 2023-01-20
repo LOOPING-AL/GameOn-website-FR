@@ -10,8 +10,11 @@ export function editNav() {
 }
 
 export function launchModal() {
-  domElements.content.classList.add("show");
-  domElements.modalbg.classList.add("show");
+  domElements.modalbg.classList.add("display");
+  setTimeout(() => {
+    domElements.content.classList.add("show");
+    domElements.modalbg.classList.add("show");
+  }, 100);
 }
 
 export function closeModal() {
@@ -20,5 +23,6 @@ export function closeModal() {
   setTimeout(() => {
     domElements.modalBody.style.visibility = "visible";
     domElements.modalConfirmation.style.visibility = "hidden";
+    domElements.modalbg.classList.remove("display");
   }, 500);
 }
