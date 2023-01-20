@@ -1,12 +1,11 @@
 import { domElements } from "./domElement.js";
 
 export function editNav() {
-  var x = document.getElementById("myTopnav");
-  if (x.className === "topnav") {
-    x.className += " responsive";
+  if (domElements.topNav.className === "topnav") {
+    domElements.topNav.className += " responsive";
     return;
   }
-  x.className = "topnav";
+  domElements.className = "topnav";
 }
 
 export function launchModal() {

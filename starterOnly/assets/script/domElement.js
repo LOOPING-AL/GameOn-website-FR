@@ -1,4 +1,5 @@
 export const domElements = {
+  topNav: document.getElementById("myTopnav"),
   modalbg: document.querySelector(".bground"),
   content: document.querySelector(".content"),
   nav: document.querySelector("#nav"),
