@@ -1,4 +1,4 @@
-function testName(formInput, formErrorMessage) {
+export function testName(formInput, formErrorMessage) {
   let message = "";
 
   formInput.setAttribute("aria-invalid", false);
@@ -24,7 +24,7 @@ function testName(formInput, formErrorMessage) {
   return false;
 }
 
-function testEmail(formInput, formErrorMessage) {
+export function testEmail(formInput, formErrorMessage) {
   let message = "";
   formInput.setAttribute("aria-invalid", false);
   if (!/^[\w-\.]+@([\w-+]+\.)+[\w-]{2,4}$/g.test(formInput.value)) {
@@ -43,15 +43,15 @@ function dayDiff(d1, d2) {
   return Math.ceil((d1 - d2) / (1000 * 60 * 60 * 24));
 }
 
-function testDate(formInput, formErrorMessage) {
+export function testDate(formInput, formErrorMessage) {
   let message = "";
   const dayDiffConst = dayDiff(new Date(), new Date(formInput.value));
   if (
     /^[0-9]{4}-(((0)[0-9])|((1)[0-2]))-([0-2][0-9]|(3)[0-1])$/g.test(
       formInput.value
     ) &&
-    dayDiffConst >= 0 &&
-    dayDiffConst / 365 > 13
+    dayDiffConst / 365 > 13 &&
+    dayDiffConst / 365 <= 120
   ) {
     formInput.setAttribute("aria-invalid", false);
     formErrorMessage.innerHTML = message;
@@ -64,17 +64,20 @@ function testDate(formInput, formErrorMessage) {
   } else if (dayDiffConst / 365 <= 13) {
     message =
       "Il faut avoir plus de 13 ans pour participer au Marathon national de jeux vidéos.";
+  } else if (dayDiffConst / 365 > 120) {
+    message = "Vous êtes encore vivant?";
   }
   formErrorMessage.innerHTML = message;
   formInput.setAttribute("aria-invalid", true);
   return false;
 }
 
-function testNumberBetweenZeroAndHundred(formInput, formErrorMessage) {
+export function testNumberBetweenZeroAndHundred(formInput, formErrorMessage) {
   let message = "";
   if (
+    formInput.value !== "" &&
     !isNaN(formInput.value) &&
-    formInput.value > 0 &&
+    formInput.value >= 0 &&
     formInput.value <= 100
   ) {
     formErrorMessage.innerHTML = message;
@@ -94,7 +97,7 @@ function testNumberBetweenZeroAndHundred(formInput, formErrorMessage) {
   return false;
 }
 
-function testLocationRadioButton(formInput, formErrorMessage) {
+export function testLocationRadioButton(formInput, formErrorMessage) {
   var locationRadioButtonValid = false;
   var i = 0;
   while (!locationRadioButtonValid && i < formInput.length) {
@@ -110,14 +113,14 @@ function testLocationRadioButton(formInput, formErrorMessage) {
   formErrorMessage.style.opacity = 1;
 }
 
-function testCGU(formInput, formErrorText, formErrorMessage) {
+export function testCGU(formInput, formErrorText, formErrorMessage) {
   if (formInput.checked) {
     formErrorText.style.color = "white";
     formErrorMessage.innerHTML = "";
     formInput.setAttribute("aria-invalid", false);
     return true;
   }
-  formErrorMessage.style.color = "#e54858";
+  formErrorText.style.color = "#e54858";
   formInput.setAttribute("aria-invalid", true);
   formErrorMessage.innerHTML =
     "Vous devez vérifier que vous acceptez les termes et conditions.";

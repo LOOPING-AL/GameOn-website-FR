@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
   <head>
     <meta charset="utf-8" />
-    <title>Reservation</title>
+    <title>Réservation</title>
     <meta name="viewport" content="width=device-width,initial-scale=1" />
+
     <link rel="stylesheet" href="/assets/style/modal.css" />
     <link
       rel="stylesheet"
@@ -13,6 +14,8 @@
       href="https://fonts.googleapis.com/css?family=DM+Sans"
       rel="stylesheet"
     />
+
+    <script src="assets/script/index.js" type="module" defer></script>
   </head>
 
   <body>
@@ -27,7 +30,8 @@
         <a href="#"><span>À propos</span></a>
         <a href="#"><span>Contact</span></a>
         <a href="#"><span>Évènements passés</span></a>
-        <a href="javascript:void(0);" class="icon" onclick="editNav()">
+        <!-- Remplacer le onClick par un eventListener dans le fichier index.js -->
+        <a id="nav" class="icon">
           <i class="fa fa-bars"></i>
         </a>
       </div>
@@ -59,12 +63,7 @@
           <span class="close"></span>
 
           <div class="modal-body">
-            <form
-              name="reserve"
-              action="index.html"
-              method="get"
-              onsubmit="return validate()"
-            >
+            <form id="formAll">
               <div class="formData">
                 <label for="first">Prénom</label><br />
                 <input
@@ -251,9 +250,5 @@
     <footer>
       <p class="copyrights">Copyright 2014 - 2022, GameOn Inc.</p>
     </footer>
-
-    <script src="assets/script/domElement.js"></script>
-    <script src="assets/script/modal.js"></script>
-    <script src="assets/script/test.js"></script>
   </body>
 </html>
