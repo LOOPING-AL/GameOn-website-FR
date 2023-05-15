@@ -30,7 +30,7 @@ domElements.modalBtn.forEach((btn) =>
   btn.addEventListener("click", () => launchModal())
 );
 
-domElements.form.addEventListener("submit", ()=>validate());
+domElements.form.addEventListener("submit", () => validate());
 
 domElements.modalConfirmationButton.addEventListener("click", () =>
   reinitialisation()
